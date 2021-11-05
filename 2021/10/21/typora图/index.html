@@ -1,0 +1,626 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/panda.png">
+  <link rel="icon" href="/img/panda.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="Liu">
+  <meta name="keywords" content="">
+  <meta name="description" content="在线制作图形并生成mermaid 流程图流程图1PS: hexo不支持流程图需要安装flowchart插件 1npm install --save hexo-filter-flowchart     start：开始框 operation：处理框 condition：判断框 inputoutput：输入输出框 end：结束框 subroutine：子流程  各框通过“-&gt;”连接。定义上述基本">
+<meta property="og:type" content="article">
+<meta property="og:title" content="markdown 绘制图形">
+<meta property="og:url" content="http://example.com/2021/10/21/typora%E5%9B%BE/index.html">
+<meta property="og:site_name" content="泰若熊猫">
+<meta property="og:description" content="在线制作图形并生成mermaid 流程图流程图1PS: hexo不支持流程图需要安装flowchart插件 1npm install --save hexo-filter-flowchart     start：开始框 operation：处理框 condition：判断框 inputoutput：输入输出框 end：结束框 subroutine：子流程  各框通过“-&gt;”连接。定义上述基本">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-10-21T06:08:18.000Z">
+<meta property="article:modified_time" content="2021-10-27T06:16:11.954Z">
+<meta property="article:author" content="Liu">
+<meta property="article:tag" content="typora">
+<meta property="article:tag" content="mermaid">
+<meta name="twitter:card" content="summary_large_image">
+  
+  <title>markdown 绘制图形 - 泰若熊猫</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.12","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname"}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>泰若熊猫</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/bg/dot-01.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="markdown 绘制图形">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-10-21 14:08" pubdate>
+        2021年10月21日 下午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      3.4k 字
+    </span>
+  
+
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      11 分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">markdown 绘制图形</h1>
+            
+            <div class="markdown-body">
+              <p><a target="_blank" rel="noopener" href="https://mermaid-js.github.io/mermaid-live-editor/edit#eyJjb2RlIjoiZ3JhcGggVERcbiAgICBBW0NocmlzdG1hc10gLS0-fEdldCBtb25leXwgQihHbyBzaG9wcGluZylcbiAgICBCIC0tPiBDe0xldCBtZSB0aGlua31cbiAgICBDIC0tPnxPbmV8IERbTGFwdG9wXVxuICAgIEMgLS0-fFR3b3wgRVtpUGhvbmVdXG4gICAgQyAtLT58VGhyZWV8IEZbZmE6ZmEtY2FyIENhcl1cbiAgIiwibWVybWFpZCI6IntcbiAgXCJ0aGVtZVwiOiBcImRlZmF1bHRcIlxufSIsInVwZGF0ZUVkaXRvciI6dHJ1ZSwiYXV0b1N5bmMiOnRydWUsInVwZGF0ZURpYWdyYW0iOnRydWV9">在线制作图形并生成mermaid</a></p>
+<h1 id="流程图"><a href="#流程图" class="headerlink" title="流程图"></a>流程图</h1><h2 id="流程图1"><a href="#流程图1" class="headerlink" title="流程图1"></a>流程图1</h2><p>PS: hexo不支持流程图需要安装flowchart插件</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">npm install --save hexo-filter-flowchart<br></code></pre></td></tr></table></figure>
+
+
+
+<ul>
+<li>start：开始框</li>
+<li>operation：处理框</li>
+<li>condition：判断框</li>
+<li>inputoutput：输入输出框</li>
+<li>end：结束框</li>
+<li>subroutine：子流程</li>
+</ul>
+<p>各框通过“-&gt;”连接。定义上述基本元素的语句是：</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs dart">元素ID=&gt;元素类型：展示文字<br><br>元素ID(方向）-&gt;元素ID<br></code></pre></td></tr></table></figure>
+
+<p>其中，方向有以下四种</p>
+<ul>
+<li>top</li>
+<li>bottom</li>
+<li>right</li>
+<li>left</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs text">start1=&gt;start: 初始设计<br>op1=&gt;operation: P=0<br>op2=&gt;operation: 结构分析与敏度分析<br>op3=&gt;operation: 建立原问题（Primal Problem）<br>op4=&gt;operation: 建立近似问题（Approximate Proble）<br>op5=&gt;operation: 求解近似问题，得到$X^&#123;P+1&#125;$<br>cond1=&gt;condition: 是否小于允许误差<br>op6=&gt;operation: P=P+1<br>op7=&gt;inputoutput: 1=2=3<br>op8=&gt;subroutine: subroutine<br>end=&gt;end: 结束<br><br>start1-&gt;op1-&gt;op2-&gt;op3-&gt;op4-&gt;op5-&gt;op7-&gt;op8-&gt;cond1<br>cond1(no)-&gt;op6-&gt;op2<br>cond1(yes)-&gt;end<br></code></pre></td></tr></table></figure>
+
+
+
+
+
+<div id="flowchart-0" class="flow-chart"></div>
+
+
+
+<h2 id="流程图2"><a href="#流程图2" class="headerlink" title="流程图2"></a>流程图2</h2><p>思维导图实现简单流程图</p>
+<figure class="highlight coq"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs coq">```mermaid<br>graph TD<br>    A[Christmas] --&gt;|<span class="hljs-type">Get</span> money| <span class="hljs-type">B</span>(Go shopping)<br>    B --&gt; C&#123;<span class="hljs-keyword">Let</span> me think&#125;<br>    C --&gt;|<span class="hljs-type">One</span>| <span class="hljs-type">D</span>[Laptop]<br>    C --&gt;|<span class="hljs-type">Two</span>| <span class="hljs-type">E</span>[iPhone]<br>    C --&gt;|<span class="hljs-type">Three</span>| <span class="hljs-type">F</span>[fa:fa-car Car]<br>    F --&gt; B<br>```<br></code></pre></td></tr></table></figure>
+
+
+
+<pre><code class=" mermaid">graph TD
+    A[Christmas] --&gt;|Get money| B(Go shopping)
+    B --&gt; C&#123;Let me think&#125;
+    C --&gt;|One| D[Laptop]
+    C --&gt;|Two| E[iPhone]
+    C --&gt;|Three| F[fa:fa-car Car]
+    F --&gt; B
+</code></pre>
+
+
+
+<h1 id="思维导出"><a href="#思维导出" class="headerlink" title="思维导出"></a>思维导出</h1><p>Typora的流程图分为横向和纵向的流程图。</p>
+<p>具体来说，是通过mermaid语言的代码块来实现的。</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs css">```mermaid<br>graph LR<br><span class="hljs-selector-tag">A</span><span class="hljs-selector-attr">[青柠学术]</span>--&gt;<span class="hljs-selector-tag">B</span><span class="hljs-selector-attr">[博主]</span><br><span class="hljs-selector-tag">A</span>--&gt;C<span class="hljs-selector-attr">[Up主]</span><br><span class="hljs-selector-tag">A</span>--&gt;D<span class="hljs-selector-attr">[社群]</span><br><span class="hljs-selector-tag">B</span>--&gt;E<span class="hljs-selector-attr">[公众号]</span><br><span class="hljs-selector-tag">B</span>--&gt;F<span class="hljs-selector-attr">[知乎]</span><br>C--&gt;H<span class="hljs-selector-attr">[B站]</span><br>C--&gt;<span class="hljs-selector-tag">I</span><span class="hljs-selector-attr">[荔枝微课]</span><br>D--&gt;J<span class="hljs-selector-attr">[知识星球]</span><br>D--&gt;K<span class="hljs-selector-attr">[微信群]</span><br>```<br></code></pre></td></tr></table></figure>
+
+
+
+<pre><code class=" mermaid">graph LR
+A[青柠学术]--&gt;B[博主]
+A--&gt;C[Up主]
+A--&gt;D[社群]
+B--&gt;E[公众号]
+B--&gt;F[知乎]
+C--&gt;H[B站]
+C--&gt;I[荔枝微课]
+D--&gt;J[知识星球]
+D--&gt;K[微信群]
+</code></pre>
+
+
+
+<p>写这样一个思维导图代码其实非常简单。</p>
+<p>其中<code>mermaid</code>为代码块的语言，<code>graph LR</code>代表横向流程图。</p>
+<p>框图中的每个节点用<code>ABCD...</code>代替，<strong>相同字母代表同一节点</strong>，节点内容在<code>[]</code>内填写。</p>
+<p>以上是横向流程图，下面看下竖向思维导图。</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs css">```mermaid<br>graph <span class="hljs-selector-tag">TD</span><br><span class="hljs-selector-tag">A</span><span class="hljs-selector-attr">[青柠学术]</span>--&gt;<span class="hljs-selector-tag">B</span><span class="hljs-selector-attr">[博主]</span><br><span class="hljs-selector-tag">A</span>--&gt;C<span class="hljs-selector-attr">[Up主]</span><br><span class="hljs-selector-tag">A</span>--&gt;D<span class="hljs-selector-attr">[社群]</span><br><span class="hljs-selector-tag">B</span>--&gt;E<span class="hljs-selector-attr">[公众号]</span><br><span class="hljs-selector-tag">B</span>--&gt;F<span class="hljs-selector-attr">[知乎]</span><br>C--&gt;H<span class="hljs-selector-attr">[B站]</span><br>C--&gt;<span class="hljs-selector-tag">I</span><span class="hljs-selector-attr">[荔枝微课]</span><br>D--&gt;J<span class="hljs-selector-attr">[知识星球]</span><br>D--&gt;K<span class="hljs-selector-attr">[微信群]</span><br>```<br></code></pre></td></tr></table></figure>
+
+
+
+<pre><code class=" mermaid">graph TD
+A[青柠学术]--&gt;B[博主]
+A--&gt;C[Up主]
+A--&gt;D[社群]
+B--&gt;E[公众号]
+B--&gt;F[知乎]
+C--&gt;H[B站]
+C--&gt;I[荔枝微课]
+D--&gt;J[知识星球]
+D--&gt;K[微信群]
+</code></pre>
+
+
+
+<h1 id="时序图"><a href="#时序图" class="headerlink" title="时序图"></a>时序图</h1><p>时序图的代码示例如下：</p>
+<figure class="highlight xl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs xl">```mermaid<br>sequenceDiagram<br>    A<span class="hljs-function"><span class="hljs-title">lice</span>-&gt;</span>&gt;+John: Hello John, how are you?<br>    A<span class="hljs-function"><span class="hljs-title">lice</span>-&gt;</span>&gt;+Tom: Hello John, how are you?<br>    A<span class="hljs-function"><span class="hljs-title">lice</span>-&gt;</span>&gt;+John: John, can you hear me?<br>    J<span class="hljs-function"><span class="hljs-title">ohn</span>--&gt;</span>&gt;-Alice: Hi Alice, I can hear you!<br>    J<span class="hljs-function"><span class="hljs-title">ohn</span>--&gt;</span>&gt;-Alice: I feel great!<br>```<br></code></pre></td></tr></table></figure>
+
+
+
+<pre><code class=" mermaid">sequenceDiagram
+    Alice-&gt;&gt;+John: Hello John, how are you?
+    Alice-&gt;&gt;+Tom: Hello John, how are you?
+    Alice-&gt;&gt;+John: John, can you hear me?
+    John--&gt;&gt;-Alice: Hi Alice, I can hear you!
+    John--&gt;&gt;-Alice: I feel great!
+</code></pre>
+
+
+
+<h1 id="状态图"><a href="#状态图" class="headerlink" title="状态图"></a>状态图</h1><figure class="highlight xl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs xl">```mermaid<br>stateDiagram-v2<br>[*] --&gt; Still<br>S<span class="hljs-function"><span class="hljs-title">till</span> --&gt;</span> [*]<br>S<span class="hljs-function"><span class="hljs-title">till</span> --&gt;</span> Moving<br>M<span class="hljs-function"><span class="hljs-title">oving</span> --&gt;</span> Still<br>M<span class="hljs-function"><span class="hljs-title">oving</span> --&gt;</span> Crash<br>C<span class="hljs-function"><span class="hljs-title">rash</span> --&gt;</span> [*]<br>```<br></code></pre></td></tr></table></figure>
+
+
+
+<pre><code class=" mermaid">stateDiagram-v2
+[*] --&gt; Still
+Still --&gt; [*]
+Still --&gt; Moving
+Moving --&gt; Still
+Moving --&gt; Crash
+Crash --&gt; [*]
+</code></pre>
+
+
+
+<h1 id="饼图"><a href="#饼图" class="headerlink" title="饼图"></a>饼图</h1><figure class="highlight ada"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs ada">```mermaid<br>pie title Pets adopted by volunteers<br>    <span class="hljs-string">&quot;Dogs&quot;</span> : 386<br>    <span class="hljs-string">&quot;Cats&quot;</span> : 85<br>    <span class="hljs-string">&quot;Rats&quot;</span> : 15<br>```<br></code></pre></td></tr></table></figure>
+
+
+
+<pre><code class=" mermaid">pie title Pets adopted by volunteers
+    &quot;Dogs&quot; : 386
+    &quot;Cats&quot; : 85
+    &quot;Rats&quot; : 15
+</code></pre>
+
+
+
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.2.7/raphael.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/flowchart/1.6.5/flowchart.min.js"></script><textarea id="flowchart-0-code" style="display: none">start1=>start: 初始设计
+op1=>operation: P=0
+op2=>operation: 结构分析与敏度分析
+op3=>operation: 建立原问题（Primal Problem）
+op4=>operation: 建立近似问题（Approximate Proble）
+op5=>operation: 求解近似问题，得到$X^{P+1}$
+cond1=>condition: 是否小于允许误差
+op6=>operation: P=P+1
+op7=>inputoutput: 1=2=3
+op8=>subroutine: subroutine
+end=>end: 结束
+
+start1->op1->op2->op3->op4->op5->op7->op8->cond1
+cond1(no)->op6->op2
+cond1(yes)->end</textarea><textarea id="flowchart-0-options" style="display: none">{"scale":1,"line-width":2,"line-length":50,"text-margin":10,"font-size":12}</textarea><script>  var code = document.getElementById("flowchart-0-code").value;  var options = JSON.parse(decodeURIComponent(document.getElementById("flowchart-0-options").value));  var diagram = flowchart.parse(code);  diagram.drawSVG("flowchart-0", options);</script>
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/typora/">typora</a>
+                    
+                      <a class="hover-with-bg" href="/tags/mermaid/">mermaid</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2021/10/21/%E6%90%AD%E5%BB%BA%E9%82%AE%E4%BB%B6%E6%94%B6%E5%8F%91%E6%9C%8D%E5%8A%A1%E5%99%A8/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">ubuntu下搭建邮件收发服务器</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/10/21/hexo%E5%AE%89%E8%A3%85%E5%8F%8Afluid%E4%B8%BB%E9%A2%98%E6%8F%92%E4%BB%B6%E5%AE%89%E8%A3%85/">
+                        <span class="hidden-mobile">hexo安装及fluid主题插件安装</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments" lazyload>
+                
+                  
+                
+                
+  <div id="gitalk-container"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#gitalk-container', function() {
+      Fluid.utils.createCssLink('/css/gitalk.css')
+      Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', function() {
+        var options = Object.assign(
+          {"clientID":"adcd33542affa5ec5400","clientSecret":"195e1c8811d2b8fd0152ef02bddca0dbab78c06f","repo":"liuxc0116.github.io","owner":"liuxc0116","admin":["liuxc0116"],"language":"zh-CN","labels":["Gitalk"],"perPage":10,"pagerDirection":"last","distractionFreeMode":false,"createIssueManually":true,"proxy":"https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token"},
+          {
+            id: '04cb9d9039478aa25b6e10d308b4fd0e'
+          }
+        )
+        var gitalk = new Gitalk(options);
+        gitalk.render('gitalk-container');
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js" ></script>
+  
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/mermaid@8/dist/mermaid.min.js" ></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({"theme":"default"});
+    }
+  </script>
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>

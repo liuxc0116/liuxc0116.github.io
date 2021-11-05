@@ -1,0 +1,525 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/panda.png">
+  <link rel="icon" href="/img/panda.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="Liu">
+  <meta name="keywords" content="">
+  <meta name="description" content="编译环境：openwrt-19.07 MT7621-MIPS 下载openwrt-shellinabox构建包克隆openwrt-shellinabox到package&#x2F;shellinabox 下 1git clone https:&#x2F;&#x2F;github.com&#x2F;openwrt-develop&#x2F;openwrt-shellinabox package&#x2F;shellinabox  openwrt-shelli">
+<meta property="og:type" content="article">
+<meta property="og:title" content="mips平台下交叉编译shellinabox">
+<meta property="og:url" content="http://example.com/2021/10/26/%E4%BA%A4%E5%8F%89%E7%BC%96%E8%AF%91shellinabox/index.html">
+<meta property="og:site_name" content="泰若熊猫">
+<meta property="og:description" content="编译环境：openwrt-19.07 MT7621-MIPS 下载openwrt-shellinabox构建包克隆openwrt-shellinabox到package&#x2F;shellinabox 下 1git clone https:&#x2F;&#x2F;github.com&#x2F;openwrt-develop&#x2F;openwrt-shellinabox package&#x2F;shellinabox  openwrt-shelli">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://gitee.com/liuxc0116/img01/raw/master/20211026175554.png">
+<meta property="article:published_time" content="2021-10-26T09:40:33.000Z">
+<meta property="article:modified_time" content="2021-10-27T06:15:52.956Z">
+<meta property="article:author" content="Liu">
+<meta property="article:tag" content="mips">
+<meta property="article:tag" content="openwrt">
+<meta property="article:tag" content="shellinabox">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://gitee.com/liuxc0116/img01/raw/master/20211026175554.png">
+  
+  <title>mips平台下交叉编译shellinabox - 泰若熊猫</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.12","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname"}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>泰若熊猫</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/bg/night-city-02.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="mips平台下交叉编译shellinabox">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-10-26 17:40" pubdate>
+        2021年10月26日 下午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      7.1k 字
+    </span>
+  
+
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      22 分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">mips平台下交叉编译shellinabox</h1>
+            
+            <div class="markdown-body">
+              <p>编译环境：openwrt-19.07 MT7621-MIPS</p>
+<h1 id="下载openwrt-shellinabox构建包"><a href="#下载openwrt-shellinabox构建包" class="headerlink" title="下载openwrt-shellinabox构建包"></a>下载openwrt-shellinabox构建包</h1><p>克隆openwrt-shellinabox到package/shellinabox 下</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">git clone https://github.com/openwrt-develop/openwrt-shellinabox package/shellinabox<br></code></pre></td></tr></table></figure>
+
+<p>openwrt-shellinabox的Makefile如下</p>
+<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><code class="hljs makefile"><span class="hljs-keyword">include</span> <span class="hljs-variable">$(TOPDIR)</span>/rules.mk<br><br>PKG_NAME:=shellinabox<br>PKG_VERSION:=2.20<br>PKG_RELEASE:=<span class="hljs-variable">$(PKG_SOURCE_VERSION)</span><br><br>PKG_SOURCE_PROTO:=git<br>PKG_SOURCE_URL:=https://github.com/shellinabox/shellinabox.git<br>PKG_SOURCE_SUBDIR:=<span class="hljs-variable">$(PKG_NAME)</span>-<span class="hljs-variable">$(PKG_VERSION)</span><br>PKG_SOURCE_VERSION:=98e6eebc6c2026fb126a458c6cb5a2541447258e<br>PKG_SOURCE:=<span class="hljs-variable">$(PKG_NAME)</span>-<span class="hljs-variable">$(PKG_VERSION)</span>.tar.gz<br><br>PKG_FIXUP:=autoreconf<br><br><span class="hljs-keyword">include</span> <span class="hljs-variable">$(INCLUDE_DIR)</span>/package.mk<br><br><span class="hljs-keyword">define</span> Package/shellinabox <br>  SECTION:=net<br>  CATEGORY:=Network<br>  TITLE:=a web based terminal emulator<br>  URL:=https://github.com/shellinabox/shellinabox<br>  DEPENDS:=+zlib +libopenssl +busybox +@BUSYBOX_CUSTOM +@BUSYBOX_CONFIG_LOGIN<br><span class="hljs-keyword">endef</span><br><br><span class="hljs-keyword">define</span> Package/shellinabox/description<br>	Shell In A Box implements a web server that <br>	can <span class="hljs-keyword">export</span> arbitrary command line tools to <br>	a web based terminal emulator. This emulator <br>	is accessible to any JavaScript and CSS <br>	enabled web browser and does not require any additional browser plugins.<br><span class="hljs-keyword">endef</span><br><br>CONFIGURE_ARGS += --disable-utmp<br><br><span class="hljs-keyword">define</span> Package/shellinabox/install<br>	<span class="hljs-variable">$(INSTALL_DIR)</span> $(1)/usr/sbin $(1)/etc/init.d $(1)/etc/shellinabox<br>	<span class="hljs-variable">$(INSTALL_BIN)</span> <span class="hljs-variable">$(PKG_BUILD_DIR)</span>/shellinaboxd $(1)/usr/sbin<br>	<span class="hljs-variable">$(INSTALL_BIN)</span> ./files/shellinaboxd.init $(1)/etc/init.d/shellinaboxd<br>	<span class="hljs-variable">$(INSTALL_DATA)</span> <span class="hljs-variable">$(PKG_BUILD_DIR)</span>/shellinabox/*.css $(1)/etc/shellinabox<br>	<span class="hljs-variable">$(PKG_BUILD_DIR)</span>/make-chained-cert.sh &gt; $(1)/etc/shellinabox/certificate.pem<br><span class="hljs-keyword">endef</span><br><br><span class="hljs-variable">$(<span class="hljs-built_in">eval</span> $(<span class="hljs-built_in">call</span> BuildPackage,shellinabox)</span>)<br></code></pre></td></tr></table></figure>
+
+<h1 id="编译"><a href="#编译" class="headerlink" title="编译"></a>编译</h1><p>执行 <code>make menuconfig</code> ,按路径 <strong>net-&gt;Network-&gt;shellinabox</strong> 找到shellinabox, 然后按下空格键选中&lt;*&gt;shellinabox, 最后保存退出。</p>
+<p>执行 <code>make package/shellinabox/compile V=s</code> </p>
+<p>在我的环境编译报报错如下</p>
+<p><img src="https://gitee.com/liuxc0116/img01/raw/master/20211026175554.png" srcset="/img/loading.gif" lazyload alt="image-20211026175545356"></p>
+<p>看报错应该是没有链接到openssl库, 在往上看日志发现编译的时候根本没有链接openssl库</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">OpenWrt-libtool: link: mipsel-openwrt-linux-musl-gcc -g -std=gnu99 -Wall -Os -pipe -mno-branch-likely -mips32r2 -mtune=24kc -fno-caller-saves -fno-plt -fhonour-copts -Wno-error=unused-but-set-variable -Wno-error=unused-result -msoft-float -mips16 -minterlink-mips16 -iremap/home/openwrt-19.07/build_dir/target-mipsel_24kc_musl/shellinabox-2.20:shellinabox-2.20 -Wformat -Werror=format-security -fstack-protector -D_FORTIFY_SOURCE=1 -Wl,-z -Wl,now -Wl,-z -Wl,relro -znow -zrelro -o shellinaboxd shellinabox/shellinaboxd.o shellinabox/externalfile.o shellinabox/launcher.o shellinabox/privileges.o shellinabox/service.o shellinabox/session.o shellinabox/usercss.o  -L/home/openwrt-19.07/staging_dir/target-mipsel_24kc_musl/usr/lib -L/home/openwrt-19.07/staging_dir/target-mipsel_24kc_musl/lib -L/home/openwrt-19.07/staging_dir/toolchain-mipsel_24kc_gcc-7.5.0_musl/usr/lib -L/home/openwrt-19.07/staging_dir/toolchain-mipsel_24kc_gcc-7.5.0_musl/lib ./.libs/liblogging.a ./.libs/libhttp.a -lz<br></code></pre></td></tr></table></figure>
+
+<p>查看shellinabox的编译配置发现只能当runtime_loading值为no的时候才会显示链接 <code>-lssl -lcrypto</code></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs shell">if test &quot;x$enable_runtime_loading&quot; == xno; then<br>  dnl Link against OpenSSL libraries, unless SSL support has been disabled<br>  if test &quot;x$enable_ssl&quot; != xno; then<br>    AC_CHECK_HEADER(openssl/bio.h,<br>      [AC_CHECK_HEADER(openssl/err.h,<br>        [AC_CHECK_HEADER(openssl/ssl.h, [LIBS=&quot;-lssl -lcrypto $LIBS&quot;])])])<br>  fi<br><br>  dnl Link against PAM libraries, unless PAM support has been disabled<br>  if test &quot;x$enable_pam&quot; != xno; then<br>    AC_CHECK_HEADER(security/pam_appl.h, [LIBS=&quot;-lpam $LIBS&quot;])<br>    AC_CHECK_HEADER(security/pam_misc.h, [LIBS=&quot;-lpam_misc $LIBS&quot;])<br>  fi<br>fi<br></code></pre></td></tr></table></figure>
+
+<p>接着查看runtime_loading的值, 默认runtime-loading的值是yes, </p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs shell">dnl We try to always use dlopen() instead of linking libraries dynamically, as<br>dnl this reduces the hard run-time dependencies that our binary has. But we<br>dnl allow users to disable this feature.<br>AC_ARG_ENABLE(runtime-loading,<br>              [  --disable-runtime-loading ShellInABox will try to load the OpenSSL, and PAM<br>                            libraries at run-time, if it has been compiled with<br>                            support for these libraries, and if the operating<br>                            system supports dynamic loading of libraries. This<br>                            allows you to install the same binary on different<br>                            systems independent of whether they have OpenSSL<br>                            and PAM enabled.  If you would rather directly link<br>                            these libraries into the binary, thus making them a<br>                            hard dependency, then disable runtime-loading.])<br></code></pre></td></tr></table></figure>
+
+<p>于是我们在Makefile里加上 <code>--disable-runtime-loading</code>  禁止掉runtime-loading</p>
+<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs makefile">CONFIGURE_ARGS += --disable-utmp --disable-runtime-loading<br></code></pre></td></tr></table></figure>
+
+<p>继续 <code>make package/shellinabox/compile V=s</code></p>
+<p>然后又报错如下</p>
+<figure class="highlight subunit"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs subunit">Package shellinabox is missing dependencies for the following libraries:<br>libpam.so.0<br>libpam_misc.so.0<br>Makefile:45: recipe for target &#x27;/home/openwrt<span class="hljs-string">-19</span>.07/bin/targets/ramips/mt7621/packages/shellinabox_2.20_mipsel_24kc.ipk&#x27; failed<br>make[2]: *** [/home/openwrt<span class="hljs-string">-19</span>.07/bin/targets/ramips/mt7621/packages/shellinabox_2.20_mipsel_24kc.ipk] Error 1<br>make[2]: Leaving directory &#x27;/home/openwrt<span class="hljs-string">-19</span>.07/feeds/linker/shellinabox&#x27;<br><span class="hljs-keyword">time:</span> package/feeds/linker/shellinabox/compile#15.89#1.39#24.26<br>package/Makefile:111: recipe for target &#x27;package/feeds/linker/shellinabox/compile&#x27; failed<br>make[1]: *** [package/feeds/linker/shellinabox/compile] Error 2<br>make[1]: Leaving directory &#x27;/home/openwrt<span class="hljs-string">-19</span>.07&#x27;<br>/home/openwrt<span class="hljs-string">-19</span>.07/include/toplevel.mk:225: recipe for target &#x27;package/feeds/linker/shellinabox/compile&#x27; failed<br>make: *** [package/feeds/linker/shellinabox/compile] Error 2<br></code></pre></td></tr></table></figure>
+
+<p>报错信息很清楚了，没有添加libpam的依赖。我们在Makefile中添加libpam依赖。如下：</p>
+<figure class="highlight dts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs dts">define Package/shellinabox <br><span class="hljs-symbol">  SECTION:</span>=net<br><span class="hljs-symbol">  CATEGORY:</span>=Network<br><span class="hljs-symbol">  TITLE:</span>=a web based terminal emulator<br><span class="hljs-symbol">  URL:</span>=https:<span class="hljs-comment">//github.com/shellinabox/shellinabox</span><br><span class="hljs-symbol">  DEPENDS:</span>=+zlib +libopenssl +libpam +busybox +@BUSYBOX_CUSTOM +@BUSYBOX_CONFIG_LOGIN<br>endef<br></code></pre></td></tr></table></figure>
+
+<p>继续编译 <code>make package/shellinabox/compile V=s</code></p>
+<p>终于编译通过</p>
+<p>完整的Makefile如下</p>
+<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><code class="hljs makefile"><span class="hljs-keyword">include</span> <span class="hljs-variable">$(TOPDIR)</span>/rules.mk<br><br>PKG_NAME:=shellinabox<br>PKG_VERSION:=2.20<br>PKG_RELEASE:=<span class="hljs-variable">$(PKG_SOURCE_VERSION)</span><br><br>PKG_SOURCE_PROTO:=git<br>PKG_SOURCE_URL:=https://github.com/shellinabox/shellinabox.git<br>PKG_SOURCE_SUBDIR:=<span class="hljs-variable">$(PKG_NAME)</span>-<span class="hljs-variable">$(PKG_VERSION)</span><br>PKG_SOURCE_VERSION:=98e6eebc6c2026fb126a458c6cb5a2541447258e<br>PKG_SOURCE:=<span class="hljs-variable">$(PKG_NAME)</span>-<span class="hljs-variable">$(PKG_VERSION)</span>.tar.gz<br><br>PKG_FIXUP:=autoreconf<br><br><span class="hljs-keyword">include</span> <span class="hljs-variable">$(INCLUDE_DIR)</span>/package.mk<br><br><span class="hljs-keyword">define</span> Package/shellinabox <br>  SECTION:=net<br>  CATEGORY:=Network<br>  TITLE:=a web based terminal emulator<br>  URL:=https://github.com/shellinabox/shellinabox<br>  DEPENDS:=+zlib +libopenssl +libpam +busybox +@BUSYBOX_CUSTOM +@BUSYBOX_CONFIG_LOGIN<br><span class="hljs-keyword">endef</span><br><br><span class="hljs-keyword">define</span> Package/shellinabox/description<br>	Shell In A Box implements a web server that <br>	can <span class="hljs-keyword">export</span> arbitrary command line tools to <br>	a web based terminal emulator. This emulator <br>	is accessible to any JavaScript and CSS <br>	enabled web browser and does not require any additional browser plugins.<br><span class="hljs-keyword">endef</span><br><br>CONFIGURE_ARGS += --disable-utmp --disable-runtime-loading<br><br><span class="hljs-keyword">define</span> Package/shellinabox/install<br>	<span class="hljs-variable">$(INSTALL_DIR)</span> $(1)/usr/sbin $(1)/etc/init.d $(1)/etc/shellinabox<br>	<span class="hljs-variable">$(INSTALL_BIN)</span> <span class="hljs-variable">$(PKG_BUILD_DIR)</span>/shellinaboxd $(1)/usr/sbin<br>	<span class="hljs-variable">$(INSTALL_BIN)</span> ./files/shellinaboxd.init $(1)/etc/init.d/shellinaboxd<br>	<span class="hljs-variable">$(INSTALL_DATA)</span> <span class="hljs-variable">$(PKG_BUILD_DIR)</span>/shellinabox/*.css $(1)/etc/shellinabox<br>	<span class="hljs-variable">$(PKG_BUILD_DIR)</span>/make-chained-cert.sh &gt; $(1)/etc/shellinabox/certificate.pem<br><span class="hljs-keyword">endef</span><br><br><span class="hljs-variable">$(<span class="hljs-built_in">eval</span> $(<span class="hljs-built_in">call</span> BuildPackage,shellinabox)</span>)<br></code></pre></td></tr></table></figure>
+
+
+
+<h1 id="安装及测试"><a href="#安装及测试" class="headerlink" title="安装及测试"></a>安装及测试</h1><p>把生成的安装包移动到开发板上安装 &lt;bin/targets/ramips/mt7621/packages/shellinabox_2.20_mipsel_24kc.ipk&gt;</p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">opkg</span> install shellinabox_<span class="hljs-number">2</span>.<span class="hljs-number">20</span>_mipsel_<span class="hljs-number">24</span>kc.ipk<br></code></pre></td></tr></table></figure>
+
+<p>然后测试</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta">#</span><span class="bash"> -u是指定用户的意思，默认是用nobody运行，在我的环境上使用nobody用户报错，所以我使用-u指定了root用户</span><br>shellinaboxd -u root<br></code></pre></td></tr></table></figure>
+
+<p>在浏览器中访问 <a target="_blank" rel="noopener" href="http://192.168.1.1:4200/">http://192.168.1.1:4200/</a> ，发现响应为空</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/shellinabox/shellinabox/issues/416">google</a>了下发现需要访问 <a target="_blank" rel="noopener" href="https://192.168.1.1:4200/">https://192.168.1.1:4200</a> 才行</p>
+<p>如果你想继续使用http访问，可以执行下面的命令</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta">#</span><span class="bash"> -t 代表禁止ssl</span><br>shellinaboxd -t -u root<br></code></pre></td></tr></table></figure>
+
+
+
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E5%85%B6%E4%BB%96/">其他</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/mips/">mips</a>
+                    
+                      <a class="hover-with-bg" href="/tags/openwrt/">openwrt</a>
+                    
+                      <a class="hover-with-bg" href="/tags/shellinabox/">shellinabox</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/10/25/CSS3/">
+                        <span class="hidden-mobile">CSS3新特性</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments" lazyload>
+                
+                  
+                
+                
+  <div id="gitalk-container"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#gitalk-container', function() {
+      Fluid.utils.createCssLink('/css/gitalk.css')
+      Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', function() {
+        var options = Object.assign(
+          {"clientID":"adcd33542affa5ec5400","clientSecret":"195e1c8811d2b8fd0152ef02bddca0dbab78c06f","repo":"liuxc0116.github.io","owner":"liuxc0116","admin":["liuxc0116"],"language":"zh-CN","labels":["Gitalk"],"perPage":10,"pagerDirection":"last","distractionFreeMode":false,"createIssueManually":true,"proxy":"https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token"},
+          {
+            id: '922a58a63937d056c2d89f635a1583d3'
+          }
+        )
+        var gitalk = new Gitalk(options);
+        gitalk.render('gitalk-container');
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js" ></script>
+  
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>
