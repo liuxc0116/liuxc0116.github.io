@@ -13,72 +13,89 @@
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   
   <meta name="theme-color" content="#2f4154">
-  <meta name="description" content="">
-  <meta name="author" content="Liu">
+  <meta name="author" content="John Doe">
   <meta name="keywords" content="">
-  <meta name="description" content="搭建邮件收发服务器搭建发邮件服务器安装postfix1apt-get install postfix  修改postfix配置文件vim &#x2F;etc&#x2F;postfix&#x2F;main.cf 12345678# 修改服务器域名mydomain &#x3D; example.com# 对所有IP地址提供服务inet_interfaces &#x3D; all# 提供服务类型，这里只讨论邮件发送mydestination &#x3D; $my">
+  
+    <meta name="description" content="搭建邮件收发服务器搭建发邮件服务器安装postfix1apt-get install postfix  修改postfix配置文件vim &#x2F;etc&#x2F;postfix&#x2F;main.cf 12345678# 修改服务器域名mydomain &#x3D; example.com# 对所有IP地址提供服务inet_interfaces &#x3D; all# 提供服务类型，这里只讨论邮件发送myde">
 <meta property="og:type" content="article">
 <meta property="og:title" content="ubuntu下搭建邮件收发服务器">
 <meta property="og:url" content="http://example.com/2021/10/21/%E6%90%AD%E5%BB%BA%E9%82%AE%E4%BB%B6%E6%94%B6%E5%8F%91%E6%9C%8D%E5%8A%A1%E5%99%A8/index.html">
-<meta property="og:site_name" content="泰若熊猫">
-<meta property="og:description" content="搭建邮件收发服务器搭建发邮件服务器安装postfix1apt-get install postfix  修改postfix配置文件vim &#x2F;etc&#x2F;postfix&#x2F;main.cf 12345678# 修改服务器域名mydomain &#x3D; example.com# 对所有IP地址提供服务inet_interfaces &#x3D; all# 提供服务类型，这里只讨论邮件发送mydestination &#x3D; $my">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="搭建邮件收发服务器搭建发邮件服务器安装postfix1apt-get install postfix  修改postfix配置文件vim &#x2F;etc&#x2F;postfix&#x2F;main.cf 12345678# 修改服务器域名mydomain &#x3D; example.com# 对所有IP地址提供服务inet_interfaces &#x3D; all# 提供服务类型，这里只讨论邮件发送myde">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://gitee.com/liuxc0116/img01/raw/master/20210802121130.png">
+<meta property="og:image" content="http://example.com/img/bg/night-city-01.jpg">
 <meta property="article:published_time" content="2021-10-21T08:08:18.000Z">
-<meta property="article:modified_time" content="2021-10-27T06:17:14.477Z">
-<meta property="article:author" content="Liu">
+<meta property="article:modified_time" content="2023-11-27T04:21:57.340Z">
+<meta property="article:author" content="John Doe">
 <meta property="article:tag" content="邮箱">
 <meta property="article:tag" content="email">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://gitee.com/liuxc0116/img01/raw/master/20210802121130.png">
+<meta name="twitter:image" content="http://example.com/img/bg/night-city-01.jpg">
   
-  <title>ubuntu下搭建邮件收发服务器 - 泰若熊猫</title>
-
-  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
-
-
-  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4/github-markdown.min.css" />
-  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
-
   
-    
-    
-      
-      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10/styles/github-gist.min.css" />
-    
   
+  <title>ubuntu下搭建邮件收发服务器 - Hexo</title>
 
-  
-    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
-  
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
 
 
 <!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
 
-<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
 
 
 
-<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
 
 
 <link  rel="stylesheet" href="/css/main.css" />
 
-<!-- 自定义样式保持在最底部 -->
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
 
 
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
-    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.12","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname"}},"search_path":"/local-search.xml"};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.5","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
   </script>
   <script  src="/js/utils.js" ></script>
   <script  src="/js/color-schema.js" ></script>
-<meta name="generator" content="Hexo 5.4.0"></head>
+  
+
+
+  
+<meta name="generator" content="Hexo 7.0.0"></head>
 
 
 <body>
-  <header style="height: 70vh;">
-    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
     <a class="navbar-brand" href="/">
       <strong>泰若熊猫</strong>
@@ -101,7 +118,7 @@
             <li class="nav-item">
               <a class="nav-link" href="/">
                 <i class="iconfont icon-home-fill"></i>
-                首页
+                <span>首页</span>
               </a>
             </li>
           
@@ -113,7 +130,7 @@
             <li class="nav-item">
               <a class="nav-link" href="/archives/">
                 <i class="iconfont icon-archive-fill"></i>
-                归档
+                <span>归档</span>
               </a>
             </li>
           
@@ -125,7 +142,7 @@
             <li class="nav-item">
               <a class="nav-link" href="/categories/">
                 <i class="iconfont icon-category-fill"></i>
-                分类
+                <span>分类</span>
               </a>
             </li>
           
@@ -137,7 +154,7 @@
             <li class="nav-item">
               <a class="nav-link" href="/tags/">
                 <i class="iconfont icon-tags-fill"></i>
-                标签
+                <span>标签</span>
               </a>
             </li>
           
@@ -149,7 +166,7 @@
             <li class="nav-item">
               <a class="nav-link" href="/about/">
                 <i class="iconfont icon-user-fill"></i>
-                关于
+                <span>关于</span>
               </a>
             </li>
           
@@ -157,14 +174,16 @@
         
           <li class="nav-item" id="search-btn">
             <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
-              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+              <i class="iconfont icon-search"></i>
             </a>
           </li>
+          
         
         
           <li class="nav-item" id="color-toggle-btn">
-            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
-                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
           </li>
         
       </ul>
@@ -172,57 +191,69 @@
   </div>
 </nav>
 
-    <div class="banner" id="banner" parallax=true
-         style="background: url('/img/bg/night-city-01.jpg') no-repeat center center;
-           background-size: cover;">
-      <div class="full-bg-img">
-        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
-          <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="ubuntu下搭建邮件收发服务器">
-              
-            </span>
-
-            
-              <div class="mt-3">
-  
-  
-    <span class="post-meta">
-      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2021-10-21 16:08" pubdate>
-        2021年10月21日 下午
-      </time>
-    </span>
-  
-</div>
-
-<div class="mt-1">
-  
-    <span class="post-meta mr-2">
-      <i class="iconfont icon-chart"></i>
-      4.1k 字
-    </span>
   
 
-  
-    <span class="post-meta mr-2">
-      <i class="iconfont icon-clock-fill"></i>
-      
-      
-      13 分钟
-    </span>
-  
-
-  
-  
-</div>
-
-            
-          </div>
-
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/bg/night-city-01.jpg') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="ubuntu下搭建邮件收发服务器"></span>
           
         </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2021-10-21 16:08" pubdate>
+          2021年10月21日 下午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          4.1k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          35 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
       </div>
+
+      
     </div>
+  </div>
+</div>
+
+</div>
+
   </header>
 
   <main>
@@ -231,18 +262,23 @@
 
 <div class="container-fluid nopadding-x">
   <div class="row nomargin-x">
-    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
     <div class="col-lg-8 nopadding-x-md">
       <div class="container nopadding-x-md" id="board-ctn">
-        <div class="py-5" id="board">
+        <div id="board">
           <article class="post-content mx-auto">
-            <!-- SEO header -->
-            <h1 style="display: none">ubuntu下搭建邮件收发服务器</h1>
+            <h1 id="seo-header">ubuntu下搭建邮件收发服务器</h1>
             
-            <div class="markdown-body">
-              <h1 id="搭建邮件收发服务器"><a href="#搭建邮件收发服务器" class="headerlink" title="搭建邮件收发服务器"></a>搭建邮件收发服务器</h1><h2 id="搭建发邮件服务器"><a href="#搭建发邮件服务器" class="headerlink" title="搭建发邮件服务器"></a>搭建发邮件服务器</h2><h3 id="安装postfix"><a href="#安装postfix" class="headerlink" title="安装postfix"></a>安装postfix</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">apt-get install postfix<br></code></pre></td></tr></table></figure>
+            
+              <div class="markdown-body">
+                
+                <h1 id="搭建邮件收发服务器"><a href="#搭建邮件收发服务器" class="headerlink" title="搭建邮件收发服务器"></a>搭建邮件收发服务器</h1><h2 id="搭建发邮件服务器"><a href="#搭建发邮件服务器" class="headerlink" title="搭建发邮件服务器"></a>搭建发邮件服务器</h2><h3 id="安装postfix"><a href="#安装postfix" class="headerlink" title="安装postfix"></a>安装postfix</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">apt-get install postfix<br></code></pre></td></tr></table></figure>
 
-<h3 id="修改postfix配置文件"><a href="#修改postfix配置文件" class="headerlink" title="修改postfix配置文件"></a>修改postfix配置文件</h3><p>vim /etc/postfix/main.cf</p>
+<h3 id="修改postfix配置文件"><a href="#修改postfix配置文件" class="headerlink" title="修改postfix配置文件"></a>修改postfix配置文件</h3><p>vim &#x2F;etc&#x2F;postfix&#x2F;main.cf</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 修改服务器域名</span><br>mydomain = example.com<br><br><span class="hljs-comment"># 对所有IP地址提供服务</span><br>inet_interfaces = all<br><br><span class="hljs-comment"># 提供服务类型，这里只讨论邮件发送</span><br>mydestination = <span class="hljs-variable">$myhostname</span>, localhost.<span class="hljs-variable">$mydomain</span>, localhost, <span class="hljs-variable">$mydomain</span>,mail.<span class="hljs-variable">$mydomain</span><br></code></pre></td></tr></table></figure>
 
 
@@ -250,10 +286,10 @@
 <h3 id="重启postfix"><a href="#重启postfix" class="headerlink" title="重启postfix"></a>重启postfix</h3><figure class="highlight maxima"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs maxima">systemctl enable <span class="hljs-built_in">postfix</span><br>systemctl <span class="hljs-built_in">restart</span> <span class="hljs-built_in">postfix</span><br></code></pre></td></tr></table></figure>
 
 <h3 id="本地测试修改域名解析"><a href="#本地测试修改域名解析" class="headerlink" title="本地测试修改域名解析"></a>本地测试修改域名解析</h3><p><strong>修改DNS服务器，因为我们发送邮件需要域名服务，如何配置DNS服务器请查看本人博客,DNS服务器中记录example.com一定要指向本机，否则邮件服务器不能发送邮件到指定域</strong></p>
-<p>我们测试使用修改hosts文件，打开/etc/hosts文件添加下面两行</p>
+<p>我们测试使用修改hosts文件，打开&#x2F;etc&#x2F;hosts文件添加下面两行</p>
 <figure class="highlight accesslog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs accesslog"><span class="hljs-number">127.0.0.1</span> mail.example.com<br><span class="hljs-number">127.0.0.1</span> example.com<br></code></pre></td></tr></table></figure>
 
-<h3 id="安装mail命令"><a href="#安装mail命令" class="headerlink" title="安装mail命令"></a>安装mail命令</h3><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs routeros">apt-<span class="hljs-builtin-name">get</span> install mailutils<br></code></pre></td></tr></table></figure>
+<h3 id="安装mail命令"><a href="#安装mail命令" class="headerlink" title="安装mail命令"></a>安装mail命令</h3><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs routeros">apt-<span class="hljs-built_in">get</span> install mailutils<br></code></pre></td></tr></table></figure>
 
 
 
@@ -261,19 +297,19 @@
 
 <h3 id="发送邮件"><a href="#发送邮件" class="headerlink" title="发送邮件"></a>发送邮件</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">echo</span> <span class="hljs-string">&#x27;Here is the message body.&#x27;</span> | mail -s <span class="hljs-string">&quot;Test email from ubuntu server!&quot;</span> -r mailuser1@example.com  mailuser2@example.com<br></code></pre></td></tr></table></figure>
 
-<h3 id="切换用户查看邮件"><a href="#切换用户查看邮件" class="headerlink" title="切换用户查看邮件"></a>切换用户查看邮件</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs bash">su - mailuser2<br>mailuser2@ubuntu:~$ mail<br><span class="hljs-string">&quot;/var/mail/mailuser2&quot;</span>: 1 message 1 new<br>&gt;N   1 root               Tue Dec 22 17:30  13/465   Test email from ubuntu server!<br>? <br>Return-Path: &lt;mailuser1@example.com&gt;<br>X-Original-To: mailuser2@example.com<br>Delivered-To: mailuser2@example.com<br>Received: by ubuntu (Postfix, from userid 0)<br>        id 52C4B7FDE2; Tue, 22 Dec 2020 17:30:55 +0800 (HKT)<br>Subject: Test email from ubuntu server!<br>To: &lt;mailuser2@example.com&gt;<br>X-Mailer: mail (GNU Mailutils 3.4)<br>Message-Id: &lt;20201222093055.52C4B7FDE2@ubuntu&gt;<br>Date: Tue, 22 Dec 2020 17:30:55 +0800 (HKT)<br>From: root &lt;mailuser1@example.com&gt;<br><br>Here is the message body.<br><br></code></pre></td></tr></table></figure>
+<h3 id="切换用户查看邮件"><a href="#切换用户查看邮件" class="headerlink" title="切换用户查看邮件"></a>切换用户查看邮件</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs bash">su - mailuser2<br>mailuser2@ubuntu:~$ mail<br><span class="hljs-string">&quot;/var/mail/mailuser2&quot;</span>: 1 message 1 new<br>&gt;N   1 root               Tue Dec 22 17:30  13/465   Test email from ubuntu server!<br>? <br>Return-Path: &lt;mailuser1@example.com&gt;<br>X-Original-To: mailuser2@example.com<br>Delivered-To: mailuser2@example.com<br>Received: by ubuntu (Postfix, from userid 0)<br>        <span class="hljs-built_in">id</span> 52C4B7FDE2; Tue, 22 Dec 2020 17:30:55 +0800 (HKT)<br>Subject: Test email from ubuntu server!<br>To: &lt;mailuser2@example.com&gt;<br>X-Mailer: mail (GNU Mailutils 3.4)<br>Message-Id: &lt;20201222093055.52C4B7FDE2@ubuntu&gt;<br>Date: Tue, 22 Dec 2020 17:30:55 +0800 (HKT)<br>From: root &lt;mailuser1@example.com&gt;<br><br>Here is the message body.<br><br></code></pre></td></tr></table></figure>
 
 <p><strong>postfix不支持远程读取邮件功能，所以邮件只能在服务器端打开，dovecot可以远程接收服务器中的邮件， 下面介绍如何安装和使用dovecot</strong></p>
 <h2 id="搭建收邮件服务器"><a href="#搭建收邮件服务器" class="headerlink" title="搭建收邮件服务器"></a>搭建收邮件服务器</h2><h3 id="安装-dovecot"><a href="#安装-dovecot" class="headerlink" title="安装 dovecot"></a>安装 dovecot</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># Dovecot 是一个开源的 IMAP 和 POP3 邮件服务器</span><br><span class="hljs-comment"># POP / IMAP 是 MUA 从邮件服务器中读取邮件时使用的协议。</span><br><span class="hljs-comment"># 其中，与 POP3 是从邮件服务器中下载邮件存起来，IMAP4 则是将邮件留在服务器端直接对邮件进行管理、操作。</span><br>apt-get install dovecot-common dovecot-imapd dovecot-pop3d<br></code></pre></td></tr></table></figure>
 
 <h3 id="配置dovecot"><a href="#配置dovecot" class="headerlink" title="配置dovecot"></a>配置dovecot</h3><p>测试不使用SSL，我们把配置文件中的关于安全的都关掉</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># /etc/dovecot/dovecot.conf</span><br><span class="hljs-comment"># 允许任何网络登录</span><br>login_trusted_networks = 0.0.0.0/0<br><br><br><span class="hljs-comment"># /etc/dovecot/conf.d/10-auth.conf</span><br><span class="hljs-comment"># 确保下面这行是注释状态</span><br><span class="hljs-comment"># disable_plaintext_auth = yes</span><br><br><span class="hljs-comment"># /etc/dovecot/conf.d/10-ssl.conf</span><br><span class="hljs-comment"># 确保不启用ssl</span><br>ssl = no<br><br><span class="hljs-comment"># /etc/dovecot/conf.d/10-mail.conf</span><br><span class="hljs-comment"># 确保本地邮件接收路径</span><br>mail_location = mbox:~/mail:INBOX=/var/mail/%u<br><span class="hljs-comment"># 默认下面这行没有注释</span><br>mbox_write_locks = fcntl<br><br><span class="hljs-comment"># 切换到各个用户下创建用户邮件目录</span><br>su - <span class="hljs-variable">$user</span><br>mkdir -p mail/.imap/INBOX<br></code></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># /etc/dovecot/dovecot.conf</span><br><span class="hljs-comment"># 允许任何网络登录</span><br>login_trusted_networks = 0.0.0.0/0<br><br><br><span class="hljs-comment"># /etc/dovecot/conf.d/10-auth.conf</span><br><span class="hljs-comment"># 确保下面这行是注释状态</span><br><span class="hljs-comment"># disable_plaintext_auth = yes</span><br><br><span class="hljs-comment"># /etc/dovecot/conf.d/10-ssl.conf</span><br><span class="hljs-comment"># 确保不启用ssl</span><br>ssl = no<br><br><span class="hljs-comment"># /etc/dovecot/conf.d/10-mail.conf</span><br><span class="hljs-comment"># 确保本地邮件接收路径</span><br>mail_location = mbox:~/mail:INBOX=/var/mail/%u<br><span class="hljs-comment"># 默认下面这行没有注释</span><br>mbox_write_locks = fcntl<br><br><span class="hljs-comment"># 切换到各个用户下创建用户邮件目录</span><br>su - <span class="hljs-variable">$user</span><br><span class="hljs-built_in">mkdir</span> -p mail/.imap/INBOX<br></code></pre></td></tr></table></figure>
 
 <h3 id="重启dovecot服务"><a href="#重启dovecot服务" class="headerlink" title="重启dovecot服务"></a>重启dovecot服务</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">systemctl <span class="hljs-built_in">enable</span> dovecot<br>systemctl restart dovecot<br></code></pre></td></tr></table></figure>
 
 <h3 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h3><h4 id="发送邮件-1"><a href="#发送邮件-1" class="headerlink" title="发送邮件"></a>发送邮件</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">echo</span> <span class="hljs-string">&#x27;Here is the message body.&#x27;</span> | mail -s <span class="hljs-string">&quot;Test email from ubuntu server!&quot;</span> -r mailuser1@example.com  mailuser2@example.com<br></code></pre></td></tr></table></figure>
 
-<h4 id="登录到其他机器，使用telnet收邮件"><a href="#登录到其他机器，使用telnet收邮件" class="headerlink" title="登录到其他机器，使用telnet收邮件"></a>登录到其他机器，使用telnet收邮件</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 登录到其他服务器</span><br>ssh root@172.16.3.225<br><span class="hljs-comment"># 使用telnet收邮件</span><br>telnet 172.16.3.226 110<br>Trying 172.16.3.226...<br>Connected to 172.16.3.226.<br>Escape character is <span class="hljs-string">&#x27;^]&#x27;</span>.<br>+OK [XCLIENT] Dovecot (Ubuntu) ready.<br>user mailuser2<br>+OK<br>pass 123456<br>+OK Logged <span class="hljs-keyword">in</span>.<br>list<br>+OK 1 messages:<br>1 478<br>.<br>retr 1<br>+OK 478 octets<br>Return-Path: &lt;mailuser1@example.com&gt;<br>X-Original-To: mailuser2@example.com<br>Delivered-To: mailuser2@example.com<br>Received: by ubuntu (Postfix, from userid 0)<br>        id 52C4B7FDE2; Tue, 22 Dec 2020 17:30:55 +0800 (HKT)<br>Subject: Test email from ubuntu server!<br>To: &lt;mailuser2@example.com&gt;<br>X-Mailer: mail (GNU Mailutils 3.4)<br>Message-Id: &lt;20201222093055.52C4B7FDE2@ubuntu&gt;<br>Date: Tue, 22 Dec 2020 17:30:55 +0800 (HKT)<br>From: root &lt;mailuser1@example.com&gt;<br><br>Here is the message body.<br>.<br>quit<br>+OK Logging out.<br>Connection closed by foreign host.<br><span class="hljs-comment"># 收取邮件成功</span><br></code></pre></td></tr></table></figure>
+<h4 id="登录到其他机器，使用telnet收邮件"><a href="#登录到其他机器，使用telnet收邮件" class="headerlink" title="登录到其他机器，使用telnet收邮件"></a>登录到其他机器，使用telnet收邮件</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 登录到其他服务器</span><br>ssh root@172.16.3.225<br><span class="hljs-comment"># 使用telnet收邮件</span><br>telnet 172.16.3.226 110<br>Trying 172.16.3.226...<br>Connected to 172.16.3.226.<br>Escape character is <span class="hljs-string">&#x27;^]&#x27;</span>.<br>+OK [XCLIENT] Dovecot (Ubuntu) ready.<br>user mailuser2<br>+OK<br>pass 123456<br>+OK Logged <span class="hljs-keyword">in</span>.<br>list<br>+OK 1 messages:<br>1 478<br>.<br>retr 1<br>+OK 478 octets<br>Return-Path: &lt;mailuser1@example.com&gt;<br>X-Original-To: mailuser2@example.com<br>Delivered-To: mailuser2@example.com<br>Received: by ubuntu (Postfix, from userid 0)<br>        <span class="hljs-built_in">id</span> 52C4B7FDE2; Tue, 22 Dec 2020 17:30:55 +0800 (HKT)<br>Subject: Test email from ubuntu server!<br>To: &lt;mailuser2@example.com&gt;<br>X-Mailer: mail (GNU Mailutils 3.4)<br>Message-Id: &lt;20201222093055.52C4B7FDE2@ubuntu&gt;<br>Date: Tue, 22 Dec 2020 17:30:55 +0800 (HKT)<br>From: root &lt;mailuser1@example.com&gt;<br><br>Here is the message body.<br>.<br>quit<br>+OK Logging out.<br>Connection closed by foreign host.<br><span class="hljs-comment"># 收取邮件成功</span><br></code></pre></td></tr></table></figure>
 
 <h2 id="telnet发送邮件"><a href="#telnet发送邮件" class="headerlink" title="telnet发送邮件"></a>telnet发送邮件</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs bash">通过 SMTP 协议发送邮件的整体过程如下：<br>    客户端使用 telnet 命令连接到SMTP服务器，建立会话。<br>    客户端发送一个 HELO 或 EHLO 命令。<br>    客户端发送一个 AUTH 认证命令进行用户登录（使用 smtpd 方式）。<br>    客户端发送一个 MAIL 命令指定发件人。<br>    客户端发送一个 RCPT 命令指定收件人。<br>    客户端发送一个 DATA 命令准备输入邮件正文。<br>    客户端发送一个 . 命令（点命令）表示 DATA 命令结束。<br>    客户端发送一个 QUIT 命令结束会话。<br>    <br>telnet mail.example.com 25<br>helo example.com<br>mail from:mailuser1@example.com<br>rcpt to:mailuser2@example.com<br>data<br>subobject: &lt;Test email from ubuntu server!&gt;<br>Here is the message body.<br>.&lt;回车结束&gt;<br><br>quit<br></code></pre></td></tr></table></figure>
 
@@ -283,35 +319,77 @@
 
 
 
-            </div>
-            <hr>
-            <div>
-              <div class="post-metas mb-3">
-                
-                
-                  <div class="post-meta">
-                    <i class="iconfont icon-tags"></i>
-                    
-                      <a class="hover-with-bg" href="/tags/%E9%82%AE%E7%AE%B1/">邮箱</a>
-                    
-                      <a class="hover-with-bg" href="/tags/email/">email</a>
-                    
-                  </div>
                 
               </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E9%82%AE%E7%AE%B1/" class="print-no-link">#邮箱</a>
+      
+        <a href="/tags/email/" class="print-no-link">#email</a>
+      
+    </div>
+  
+</div>
+
+
               
-                <p class="note note-warning">
-                  
-                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
-                  
-                </p>
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>ubuntu下搭建邮件收发服务器</div>
+      <div>http://example.com/2021/10/21/搭建邮件收发服务器/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>John Doe</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2021年10月21日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
               
               
-                <div class="post-prevnext">
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2021/10/23/git%E4%BB%A3%E7%A0%81%E5%9B%9E%E6%BB%9A/">
+                      <a href="/2021/10/23/git%E4%BB%A3%E7%A0%81%E5%9B%9E%E6%BB%9A/" title="git代码回滚">
                         <i class="iconfont icon-arrowleft"></i>
                         <span class="hidden-mobile">git代码回滚</span>
                         <span class="visible-mobile">上一篇</span>
@@ -321,7 +399,7 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2021/10/21/typora%E5%9B%BE/">
+                      <a href="/2021/10/21/typora%E5%9B%BE/" title="markdown 绘制图形">
                         <span class="hidden-mobile">markdown 绘制图形</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
@@ -333,50 +411,72 @@
             </div>
 
             
-              <!-- Comments -->
-              <article class="comments" id="comments" lazyload>
-                
-                  
-                
-                
-  <div id="gitalk-container"></div>
-  <script type="text/javascript">
-    Fluid.utils.loadComments('#gitalk-container', function() {
-      Fluid.utils.createCssLink('/css/gitalk.css')
-      Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', function() {
-        var options = Object.assign(
-          {"clientID":"adcd33542affa5ec5400","clientSecret":"195e1c8811d2b8fd0152ef02bddca0dbab78c06f","repo":"liuxc0116.github.io","owner":"liuxc0116","admin":["liuxc0116"],"language":"zh-CN","labels":["Gitalk"],"perPage":10,"pagerDirection":"last","distractionFreeMode":false,"createIssueManually":true,"proxy":"https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token"},
-          {
-            id: '937fe6b2b2d8a4fcd0e7c6022c5538f1'
-          }
-        )
-        var gitalk = new Gitalk(options);
-        gitalk.render('gitalk-container');
-      });
-    });
-  </script>
-  <noscript>Please enable JavaScript to view the comments</noscript>
-
-
-              </article>
-            
           </article>
         </div>
       </div>
     </div>
-    
-      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
-        <div id="toc">
-  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
   <div class="toc-body" id="toc-body"></div>
 </div>
 
-      </div>
-    
+
+
+  </aside>
+
+
+    </div>
   </div>
 </div>
 
-<!-- Custom -->
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  <script>
+  Fluid.utils.createScript('https://lib.baomitu.com/mermaid/8.14.0/mermaid.min.js', function() {
+    mermaid.initialize({"theme":"default"});
+
+    Fluid.utils.listenDOMLoaded(function() {
+      Fluid.events.registerRefreshCallback(function() {
+        if ('mermaid' in window) {
+          mermaid.init();
+        }
+      });
+    });
+  });
+</script>
+
+
+
+
 
 
     
@@ -401,35 +501,37 @@
       <div class="modal-body mx-3">
         <div class="md-form mb-5">
           <input type="text" id="local-search-input" class="form-control validate">
-          <label data-error="x" data-success="v"
-                 for="local-search-input">关键词</label>
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
         </div>
         <div class="list-group" id="local-search-result"></div>
       </div>
     </div>
   </div>
 </div>
+
     
 
     
   </main>
 
-  <footer class="text-center mt-5 py-3">
-  <div class="footer-content">
-     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
-  </div>
+  <footer>
+    <div class="footer-inner">
   
-
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
   
-
   
-</footer>
-
-
-  <!-- SCRIPTS -->
   
-  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.js" ></script>
-  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css" />
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
 
   <script>
     NProgress.configure({"showSpinner":false,"trickleSpeed":100})
@@ -440,15 +542,27 @@
   </script>
 
 
-<script  src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" ></script>
-<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js" ></script>
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
 <script  src="/js/events.js" ></script>
 <script  src="/js/plugins.js" ></script>
 
-<!-- Plugins -->
 
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
 
-  <script  src="/js/local-search.js" ></script>
 
 
 
@@ -458,56 +572,115 @@
 
 
 
-  
-
-
 
   
-    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4/dist/tocbot.min.js" ></script>
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
   
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
   
-    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js" ></script>
-  
-  
-    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4/anchor.min.js" ></script>
-  
-  
-    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js" ></script>
-  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
 
 
 
 
 
-
-  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2/lib/typed.min.js" ></script>
-  <script>
-    (function (window, document) {
-      var typing = Fluid.plugins.typing;
-      var title = document.getElementById('subtitle').title;
-      
-      typing(title)
-      
-    })(window, document);
-  </script>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<!-- 主题的启动项 保持在最底部 -->
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
 <script  src="/js/boot.js" ></script>
 
 
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
 </body>
 </html>
